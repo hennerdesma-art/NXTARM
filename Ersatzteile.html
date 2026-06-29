@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NXTARM - Ersatzteile & Zusatzmodule</title>
+  <meta
+    name="description"
+    content="Demo-Nachbestellung fuer modulare NEXT Arm Ersatzteile und Zusatzmodule."
+  />
+
+  <style>
+    :root {
+      --color-primary: #008c95;
+      --color-primary-dark: #006b72;
+      --color-primary-light: #e4f7f8;
+      --color-dark: #2f3437;
+      --color-gray: #6f787d;
+      --color-light-gray: #f4f7f8;
+      --color-white: #ffffff;
+      --color-border: #dce5e7;
+      --color-accent: #6d5bd0;
+      --shadow-soft: 0 14px 35px rgba(0, 0, 0, 0.08);
+      --shadow-card: 0 10px 28px rgba(0, 108, 114, 0.13);
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --container: 1180px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--color-dark);
+      background:
+        radial-gradient(circle at top left, rgba(0, 140, 149, 0.12), transparent 32rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--container));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      border-radius: 999px;
+      padding: 0.38rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(220, 229, 231, 0.9);
+    }
+
+    .nav-wrap {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 58px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.1rem;
+    }
+
+    .brand-title .nxt {
+      color: var(--color-primary);
+    }
+
+    .brand-subline {
+      color: var(--color-gray);
+      font-size: 0.78rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-primary-dark);
+      font-weight: 800;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px);
+      background: var(--color-primary-light);
+      border-color: rgba(0, 140, 149, 0.35);
+    }
+
+    .hero {
+      padding: 3.4rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin-top: 1rem;
+      font-size: clamp(2.6rem, 10vw, 5.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.08em;
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      font-size: clamp(1.25rem, 4vw, 2rem);
+      line-height: 1.18;
+      font-weight: 780;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-text {
+      margin-top: 1rem;
+      color: var(--color-gray);
+      font-size: 1.06rem;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.85rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 820;
+      border: 1px solid transparent;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .btn-primary {
+      color: var(--color-white);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      box-shadow: 0 12px 24px rgba(0, 140, 149, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0, 140, 149, 0.3);
+    }
+
+    .btn-secondary {
+      color: var(--color-primary-dark);
+      background: var(--color-white);
+      border-color: var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: var(--color-primary-light);
+      border-color: rgba(0, 140, 149, 0.35);
+    }
+
+    .hero-panel {
+      border: 1px solid rgba(0, 140, 149, 0.15);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 78% 20%, rgba(0, 140, 149, 0.14), transparent 11rem),
+        rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-card);
+      padding: 1.35rem;
+    }
+
+    .hero-device {
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      background:
+        radial-gradient(circle at center, rgba(228, 247, 248, 0.88), rgba(255, 255, 255, 0.9)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(228, 247, 248, 0.72));
+      overflow: hidden;
+      padding: 1.2rem;
+    }
+
+    .hero-device img {
+      max-height: 285px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 24px rgba(47, 52, 55, 0.15));
+      animation: productFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes productFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      margin-top: 0.85rem;
+      font-size: clamp(1.85rem, 6vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      margin-top: 1rem;
+      color: var(--color-gray);
+      font-size: 1.03rem;
+    }
+
+    .sustainability-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(0, 140, 149, 0.12), transparent 18rem),
+        var(--color-white);
+      box-shadow: var(--shadow-soft);
+      padding: 1.25rem;
+    }
+
+    .sustainability-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .loop-visual {
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      background: rgba(228, 247, 248, 0.48);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loop-ring {
+      width: 150px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--color-primary) 0 74%, rgba(0, 140, 149, 0.12) 74% 100%);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 13px), #000 calc(100% - 12px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 13px), #000 calc(100% - 12px));
+      animation: loopSpin 4.4s linear infinite;
+    }
+
+    .loop-label {
+      position: absolute;
+      text-align: center;
+      font-weight: 850;
+      color: var(--color-primary-dark);
+      line-height: 1.12;
+    }
+
+    @keyframes loopSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .sustainability-points {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .sustainability-point {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 0.8rem;
+      align-items: start;
+      padding: 1rem;
+      border-radius: 18px;
+      background: var(--color-light-gray);
+      border: 1px solid rgba(220, 229, 231, 0.85);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .sustainability-point.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .point-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      font-weight: 900;
+    }
+
+    .sustainability-point h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .sustainability-point p {
+      color: var(--color-gray);
+      font-size: 0.96rem;
+    }
+
+    .shop-layout {
+      display: grid;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .filter-panel {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow-soft);
+      padding: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-grid {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .form-control {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .form-control label {
+      font-size: 0.86rem;
+      color: var(--color-dark);
+      font-weight: 750;
+    }
+
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      background: var(--color-white);
+      color: var(--color-dark);
+      padding: 0.75rem 0.85rem;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-control textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-control input:focus,
+    .form-control select:focus,
+    .form-control textarea:focus {
+      border-color: rgba(0, 140, 149, 0.45);
+      box-shadow: 0 0 0 4px rgba(0, 140, 149, 0.1);
+    }
+
+    .result-line {
+      margin-top: 1rem;
+      color: var(--color-gray);
+      font-size: 0.95rem;
+    }
+
+    .parts-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .part-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-white);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 420ms ease,
+        transform 420ms ease,
+        border-color var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .part-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .part-card.is-filtered {
+      animation: filterPop 180ms ease;
+    }
+
+    .part-card:hover {
+      border-color: rgba(0, 140, 149, 0.36);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-3px);
+    }
+
+    @keyframes filterPop {
+      from { opacity: 0.5; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .part-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+
+    .part-pos {
+      flex: 0 0 auto;
+      min-width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      font-weight: 900;
+    }
+
+    .part-card h3 {
+      font-size: 1.15rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .article-number {
+      margin-top: 0.35rem;
+      color: var(--color-gray);
+      font-size: 0.9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.25rem 0.58rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 820;
+    }
+
+    .badge-made {
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+    }
+
+    .badge-standard {
+      color: #4d5559;
+      background: #edf1f2;
+    }
+
+    .badge-group {
+      color: #4f3fb2;
+      background: rgba(109, 91, 208, 0.12);
+    }
+
+    .part-actions {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .qty-input {
+      min-height: 46px;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 0.6rem 0.7rem;
+      width: 100%;
+    }
+
+    .cart-panel {
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      position: sticky;
+      top: 96px;
+      animation: cartIn 420ms ease both;
+    }
+
+    @keyframes cartIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1rem 0.85rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .cart-header h2 {
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .cart-count {
+      min-width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--color-white);
+      background: var(--color-primary);
+      font-weight: 900;
+    }
+
+    .cart-body {
+      padding: 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 0.75rem;
+      max-height: 320px;
+      overflow: auto;
+      padding-right: 0.2rem;
+    }
+
+    .cart-empty {
+      color: var(--color-gray);
+      background: var(--color-light-gray);
+      border-radius: 16px;
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .cart-item {
+      display: grid;
+      gap: 0.35rem;
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 0.75rem;
+      animation: cartIn 220ms ease both;
+    }
+
+    .cart-item strong {
+      line-height: 1.2;
+    }
+
+    .cart-item span {
+      color: var(--color-gray);
+      font-size: 0.85rem;
+      overflow-wrap: anywhere;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .remove-btn {
+      border: 0;
+      background: transparent;
+      color: var(--color-primary-dark);
+      font-weight: 800;
+      padding: 0.35rem 0;
+    }
+
+    .success-message {
+      display: none;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 140, 149, 0.22);
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      padding: 0.9rem;
+      font-weight: 700;
+    }
+
+    .success-message.is-visible {
+      display: block;
+    }
+
+    .demo-form {
+      display: grid;
+      gap: 0.85rem;
+      padding-top: 0.2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .site-footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-gray);
+      font-size: 0.92rem;
+      background: var(--color-white);
+    }
+
+    .site-footer strong {
+      color: var(--color-dark);
+    }
+
+    @media (min-width: 720px) {
+      .hero-actions {
+        flex-direction: row;
+      }
+
+      .sustainability-grid {
+        grid-template-columns: 0.8fr 1.2fr;
+        align-items: center;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr 1.2fr 1fr;
+      }
+
+      .parts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1020px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+      }
+
+      .shop-layout {
+        grid-template-columns: minmax(0, 1fr) 360px;
+      }
+
+      .parts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 1.25rem, var(--container));
+      }
+
+      .nav-wrap {
+        min-height: 72px;
+      }
+
+      .brand-logo {
+        width: 48px;
+      }
+
+      .brand-subline {
+        display: none;
+      }
+
+      .back-link {
+        min-height: 42px;
+        padding-inline: 0.85rem;
+        font-size: 0.92rem;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero-device {
+        min-height: 250px;
+      }
+
+      .hero-device img {
+        max-height: 220px;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .part-actions {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .cart-panel {
+        position: static;
+      }
+
+      .cart-items {
+        max-height: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .part-card,
+      .sustainability-point {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="NXTARM.html" aria-label="Zur NXTARM Startseite">
+        <img class="brand-logo" src="NXTARMLogo.png" alt="NXTARM Logo" />
+        <span class="brand-text">
+          <span class="brand-title"><span class="nxt">NXT</span>ARM</span>
+          <span class="brand-subline">Demo-Nachbestellung fuer modulare NXTARM Bauteile</span>
+        </span>
+      </a>
+
+      <a class="back-link" href="NXTARM.html">Startseite</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Ersatzteile & Zusatzmodule</span>
+          <h1>Ersatzteile fuer den NXTARM</h1>
+          <p class="hero-subtitle">Modular. Reparierbar. Nachhaltig nachbestellbar.</p>
+          <p class="hero-text">
+            Durch den modularen Aufbau koennen einzelne Bauteile gezielt ersetzt oder erweitert werden,
+            ohne das gesamte Produkt auszutauschen.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#bauteile">Bauteile ansehen</a>
+            <a class="btn btn-secondary" href="#anfragekorb">Anfrage starten</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="NEXT Arm Produktvisualisierung">
+          <div class="hero-device">
+            <img src="Product.png" alt="Rendering des modularen NEXT Arm Handyhalters" />
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sustainability-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Repair, Reuse, Remanufacture</span>
+          <h2 id="sustainability-title">Ersatzteile verlaengern den Produktlebenszyklus</h2>
+          <p>
+            Die Demo zeigt, wie ein modularer Nachbestellprozess Reparatur und Erweiterung
+            ermoeglicht, ohne aus dem NXTARM einen klassischen Wegwerfartikel zu machen.
+          </p>
+        </div>
+
+        <div class="sustainability-card">
+          <div class="sustainability-grid">
+            <div class="loop-visual" aria-hidden="true">
+              <div class="loop-ring"></div>
+              <div class="loop-label">Circular<br />Parts</div>
+            </div>
+
+            <div class="sustainability-points">
+              <article class="sustainability-point reveal">
+                <div class="point-icon">01</div>
+                <div>
+                  <h3>Einzelteile statt Komplettaustausch</h3>
+                  <p>Defekte oder fehlende Komponenten koennen gezielt ersetzt werden.</p>
+                </div>
+              </article>
+
+              <article class="sustainability-point reveal">
+                <div class="point-icon">02</div>
+                <div>
+                  <h3>Längere Nutzung durch Reparierbarkeit</h3>
+                  <p>Der NXTARM bleibt laenger im Einsatz, weil Module erreichbar und austauschbar sind.</p>
+                </div>
+              </article>
+
+              <article class="sustainability-point reveal">
+                <div class="point-icon">03</div>
+                <div>
+                  <h3>Modulare Erweiterung statt Neukauf</h3>
+                  <p>Neue Halterungen oder Zusatzmodule koennen das bestehende Produkt erweitern.</p>
+                </div>
+              </article>
+
+              <article class="sustainability-point reveal">
+                <div class="point-icon">04</div>
+                <div>
+                  <h3>Circular-Economy-Strategien</h3>
+                  <p>Die Logik unterstuetzt Repair, Reuse und Remanufacture im Hochschulprojekt.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bauteile" aria-labelledby="parts-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Demo-Bauteilkatalog</span>
+          <h2 id="parts-title">Filterbare Ersatzteilliste</h2>
+          <p>
+            Filtern Sie nach Baugruppe, Artikelnummer oder Bauteiltyp. Gleichteile werden bewusst mehrfach
+            angezeigt, wenn sie in mehreren Baugruppen verwendet werden.
+          </p>
+        </div>
+
+        <div class="shop-layout">
+          <div>
+            <section class="filter-panel" aria-label="Filter fuer Bauteile">
+              <div class="filter-grid">
+                <div class="form-control">
+                  <label for="groupFilter">Baugruppe / Modul</label>
+                  <select id="groupFilter">
+                    <option value="all">Alle Baugruppen</option>
+                    <option value="Kopf">Kopf</option>
+                    <option value="Verbindungsteil">Verbindungsteil</option>
+                    <option value="Koerper">Koerper</option>
+                    <option value="Fuss">Fuss</option>
+                  </select>
+                </div>
+
+                <div class="form-control">
+                  <label for="articleFilter">Artikelnummer</label>
+                  <input id="articleFilter" type="search" placeholder="z. B. UG2_NXT_ARM01SF-00" />
+                </div>
+
+                <div class="form-control">
+                  <label for="typeFilter">Bauteiltyp</label>
+                  <select id="typeFilter">
+                    <option value="all">Alle Typen</option>
+                    <option value="Eigenfertigung">Eigenfertigung</option>
+                    <option value="Normteil">Zukaufteil / Normteil</option>
+                  </select>
+                </div>
+              </div>
+
+              <p class="result-line" id="resultLine">19 Bauteile sichtbar</p>
+            </section>
+
+            <div class="parts-grid" id="partsGrid" aria-live="polite"></div>
+          </div>
+
+          <aside class="cart-panel" id="anfragekorb" aria-labelledby="cart-title">
+            <div class="cart-header">
+              <div>
+                <span class="eyebrow">Demo-Anfrage</span>
+                <h2 id="cart-title">Anfragekorb</h2>
+              </div>
+              <div class="cart-count" id="cartCount">0</div>
+            </div>
+
+            <div class="cart-body">
+              <div class="cart-items" id="cartItems">
+                <p class="cart-empty">Noch keine Bauteile hinzugefuegt.</p>
+              </div>
+
+              <button class="btn btn-primary" type="button" id="simulateRequest">Anfrage simulieren</button>
+
+              <p class="success-message" id="successMessage" role="status" aria-live="polite">
+                Ihre Ersatzteilanfrage wurde beispielhaft erfasst. In einer realen Umsetzung wuerde diese Anfrage
+                nun an das Projektteam oder die Fertigung weitergeleitet werden.
+              </p>
+
+              <form class="demo-form" id="demoForm">
+                <div class="form-control">
+                  <label for="customerName">Name</label>
+                  <input id="customerName" name="customerName" type="text" placeholder="Max Mustermann" required />
+                </div>
+
+                <div class="form-control">
+                  <label for="customerEmail">E-Mail</label>
+                  <input id="customerEmail" name="customerEmail" type="email" placeholder="max@example.com" required />
+                </div>
+
+                <div class="form-control">
+                  <label for="purpose">Verwendungszweck</label>
+                  <select id="purpose" name="purpose" required>
+                    <option value="">Bitte auswaehlen</option>
+                    <option>Ersatzteil</option>
+                    <option>Zusatzmodul</option>
+                    <option>Reparatur</option>
+                    <option>Prototypenerweiterung</option>
+                  </select>
+                </div>
+
+                <div class="form-control">
+                  <label for="message">Nachricht</label>
+                  <textarea id="message" name="message" placeholder="Optionale Hinweise zur Demo-Anfrage"></textarea>
+                </div>
+
+                <button class="btn btn-secondary" type="submit">Demo-Anfrage absenden</button>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Projektwebsite</strong> im Rahmen des Interdisciplinary Project - Werk150 / NXTARM</p>
+    </div>
+  </footer>
+
+  <script>
+    const parts = [
+      { pos: 1, group: "Kopf", article: "UG2_NXT_ARM01SF-00", name: "Montageplatte" },
+      { pos: 2, group: "Kopf", article: "UG2_NXT_ARM02SF-00", name: "Seitenhalter" },
+      { pos: 3, group: "Kopf", article: "N_NXT_ARM03ZT-00", name: "Einschmelzmutter" },
+      { pos: 4, group: "Kopf", article: "N_NXT_ARM04ZT-00", name: "Aussensechskantschraube" },
+      { pos: 5, group: "Kopf", article: "UG2_NXT_ARM05SF-00", name: "Sechskantmutter 3D-Aufsatz" },
+      { pos: 6, group: "Kopf", article: "N_NXT_ARM06ZT-00", name: "Flachschraube" },
+      { pos: 7, group: "Kopf", article: "UG2_NXT_ARM07ZT-00", name: "Haftungsstreifen" },
+      { pos: 8, group: "Verbindungsteil", article: "UG2_NXT_ARM08SF-00", name: "Rotationsgabel" },
+      { pos: 9, group: "Verbindungsteil", article: "N_NXT_ARM09ZT-00", name: "Sechskantmutter" },
+      { pos: 10, group: "Verbindungsteil", article: "UG2_NXT_ARM10SF-00", name: "Sechskantmutter 3D-Aufsatz" },
+      { pos: 11, group: "Verbindungsteil", article: "N_NXT_ARM03ZT-00", name: "Einschmelzmutter" },
+      { pos: 12, group: "Verbindungsteil", article: "N_NXT_ARM11ZT-00", name: "Schlossschraube" },
+      { pos: 13, group: "Koerper", article: "UG1_NXT_ARM12SF-00", name: "Koerperplatte" },
+      { pos: 14, group: "Koerper", article: "N_NXT_ARM11ZT-00", name: "Schlossschraube" },
+      { pos: 15, group: "Koerper", article: "N_NXT_ARM09ZT-00", name: "Sechskantmutter" },
+      { pos: 16, group: "Koerper", article: "UG2_NXT_ARM13SF-00", name: "Sechskantmutter 3D-Aufsatz" },
+      { pos: 17, group: "Fuss", article: "UG2_NXT_ARM14SF-00", name: "Klemmsockel" },
+      { pos: 18, group: "Fuss", article: "N_NXT_ARM15ZT-00", name: "Klemmschraube" },
+      { pos: 19, group: "Fuss", article: "N_NXT_ARM06ZT-00", name: "Flachschraube" }
+    ];
+
+    const cart = new Map();
+    const partsGrid = document.querySelector("#partsGrid");
+    const groupFilter = document.querySelector("#groupFilter");
+    const articleFilter = document.querySelector("#articleFilter");
+    const typeFilter = document.querySelector("#typeFilter");
+    const resultLine = document.querySelector("#resultLine");
+    const cartItems = document.querySelector("#cartItems");
+    const cartCount = document.querySelector("#cartCount");
+    const successMessage = document.querySelector("#successMessage");
+    const simulateRequest = document.querySelector("#simulateRequest");
+    const demoForm = document.querySelector("#demoForm");
+
+    function getPartType(article) {
+      return article.startsWith("UG") ? "Eigenfertigung" : "Normteil";
+    }
+
+    function getTypeLabel(type) {
+      return type === "Eigenfertigung" ? "Eigenfertigung" : "Normteil / Zukaufteil";
+    }
+
+    function renderParts(list) {
+      partsGrid.innerHTML = list.map((part) => {
+        const type = getPartType(part.article);
+        const badgeClass = type === "Eigenfertigung" ? "badge-made" : "badge-standard";
+
+        return `
+          <article class="part-card reveal is-filtered" data-pos="${part.pos}">
+            <div class="part-top">
+              <div>
+                <h3>${part.name}</h3>
+                <p class="article-number">${part.article}</p>
+              </div>
+              <div class="part-pos">${String(part.pos).padStart(2, "0")}</div>
+            </div>
+
+            <div class="badge-row">
+              <span class="badge ${badgeClass}">${getTypeLabel(type)}</span>
+              <span class="badge badge-group">${part.group}</span>
+            </div>
+
+            <div class="part-actions">
+              <input class="qty-input" type="number" min="1" value="1" aria-label="Menge fuer ${part.name}" />
+              <button class="btn btn-primary add-part" type="button" data-pos="${part.pos}">
+                Zur Anfrage hinzufuegen
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      resultLine.textContent = `${list.length} Bauteil${list.length === 1 ? "" : "e"} sichtbar`;
+      observeRevealItems();
+    }
+
+    function filterParts() {
+      const group = groupFilter.value;
+      const articleQuery = articleFilter.value.trim().toLowerCase();
+      const type = typeFilter.value;
+
+      const filtered = parts.filter((part) => {
+        const partType = getPartType(part.article);
+        const groupMatches = group === "all" || part.group === group;
+        const articleMatches = !articleQuery || part.article.toLowerCase().includes(articleQuery);
+        const typeMatches = type === "all" || partType === type;
+        return groupMatches && articleMatches && typeMatches;
+      });
+
+      renderParts(filtered);
+    }
+
+    function addToCart(pos, quantity) {
+      const part = parts.find((item) => item.pos === pos);
+      if (!part) return;
+
+      const current = cart.get(pos) || { ...part, quantity: 0 };
+      current.quantity += quantity;
+      cart.set(pos, current);
+      successMessage.classList.remove("is-visible");
+      renderCart();
+    }
+
+    function removeFromCart(pos) {
+      cart.delete(pos);
+      renderCart();
+    }
+
+    function renderCart() {
+      const items = Array.from(cart.values());
+      const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = String(totalQuantity);
+
+      if (!items.length) {
+        cartItems.innerHTML = '<p class="cart-empty">Noch keine Bauteile hinzugefuegt.</p>';
+        return;
+      }
+
+      cartItems.innerHTML = items.map((item) => `
+        <article class="cart-item">
+          <strong>${item.name}</strong>
+          <span>${item.article}</span>
+          <div class="cart-item-actions">
+            <span>Menge: ${item.quantity}</span>
+            <button class="remove-btn" type="button" data-remove="${item.pos}">Entfernen</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    // Scroll-Reveal fuer Karten und Nachhaltigkeits-Hinweise.
+    let revealObserver;
+    function observeRevealItems() {
+      const items = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        items.forEach((item) => item.classList.add("is-visible"));
+        return;
+      }
+
+      if (!revealObserver) {
+        revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+      }
+
+      items.forEach((item) => {
+        if (!item.classList.contains("is-visible")) {
+          revealObserver.observe(item);
+        }
+      });
+    }
+
+    [groupFilter, articleFilter, typeFilter].forEach((control) => {
+      control.addEventListener("input", filterParts);
+      control.addEventListener("change", filterParts);
+    });
+
+    partsGrid.addEventListener("click", (event) => {
+      const button = event.target.closest(".add-part");
+      if (!button) return;
+
+      const card = button.closest(".part-card");
+      const qtyInput = card.querySelector(".qty-input");
+      const quantity = Math.max(1, Number(qtyInput.value) || 1);
+      addToCart(Number(button.dataset.pos), quantity);
+    });
+
+    cartItems.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-remove]");
+      if (!button) return;
+      removeFromCart(Number(button.dataset.remove));
+    });
+
+    simulateRequest.addEventListener("click", () => {
+      successMessage.classList.add("is-visible");
+    });
+
+    demoForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      successMessage.classList.add("is-visible");
+      demoForm.reset();
+    });
+
+    renderParts(parts);
+    renderCart();
+    observeRevealItems();
+  </script>
+</body>
+</html>
