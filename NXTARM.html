@@ -715,26 +715,27 @@
       background: rgba(0, 140, 149, 0.08);
     }
 
-    .image-placeholder {
+    .feature-image {
       min-height: 170px;
       border-radius: 20px;
-      border: 1px dashed rgba(0, 140, 149, 0.4);
-      background:
-        linear-gradient(135deg, rgba(0, 140, 149, 0.10), rgba(255, 255, 255, 0.95)),
-        repeating-linear-gradient(
-          -45deg,
-          rgba(0, 140, 149, 0.05),
-          rgba(0, 140, 149, 0.05) 9px,
-          rgba(255, 255, 255, 0.35) 9px,
-          rgba(255, 255, 255, 0.35) 18px
-        );
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--color-primary-dark);
-      font-weight: 800;
+      border: 1px solid rgba(0, 140, 149, 0.18);
+      background: var(--color-primary-light);
       margin-bottom: 1.1rem;
-      padding: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 170px;
+      object-fit: cover;
+      transition: transform 360ms ease, filter 360ms ease;
+    }
+
+    .feature-card:hover .feature-image img {
+      transform: scale(1.04);
+      filter: saturate(1.05) contrast(1.03);
     }
 
     .feature-card h3 {
@@ -1213,8 +1214,8 @@
 
         <div class="feature-grid">
           <article class="feature-card" id="nachhaltigkeit">
-            <div class="image-placeholder">
-              Bildplatzhalter<br />Circular Economy / Materialkreislauf
+            <div class="feature-image">
+              <img src="Nachhaltigkeit.png" alt="Visualisierung von Nachhaltigkeit und Circular Economy" />
             </div>
 
             <h3>Nachhaltigkeit & Circular Economy</h3>
@@ -1235,8 +1236,8 @@
           </article>
 
           <article class="feature-card" id="modularitaet">
-            <div class="image-placeholder">
-              Bildplatzhalter<br />Explosionsansicht der Module
+            <div class="feature-image">
+              <img src="Module.png" alt="Explosionsansicht der NXTARM Module" />
             </div>
 
             <h3>Modularer Aufbau</h3>
@@ -1257,8 +1258,8 @@
           </article>
 
           <article class="feature-card" id="ersatzteile">
-            <div class="image-placeholder">
-              Bildplatzhalter<br />Ersatzteile & Zusatzmodule
+            <div class="feature-image">
+              <img src="Ersatzteile.png" alt="Ersatzteile und Zusatzmodule für NXTARM" />
             </div>
 
             <h3>Ersatzteile & Module</h3>
