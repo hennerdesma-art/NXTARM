@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXT Arm - Montage & Modulwechsel</title>
+  <meta name="description" content="Montage, Modulwechsel und PDF-Montageanleitung fuer den modularen NEXT Arm Handyhalter." />
+
+  <style>
+    :root {
+      --color-primary: #008c95;
+      --color-primary-dark: #006b72;
+      --color-primary-light: #e4f7f8;
+      --color-dark: #2f3437;
+      --color-gray: #6f787d;
+      --color-light-gray: #f4f7f8;
+      --color-white: #ffffff;
+      --color-border: #dce5e7;
+      --color-accent: #6d5bd0;
+      --shadow-soft: 0 14px 35px rgba(0, 0, 0, 0.08);
+      --shadow-card: 0 10px 28px rgba(0, 108, 114, 0.13);
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --container: 1160px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--color-dark);
+      background:
+        radial-gradient(circle at top left, rgba(0, 140, 149, 0.13), transparent 32rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--container));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      border-radius: 999px;
+      padding: 0.38rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 760;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(220, 229, 231, 0.9);
+    }
+
+    .nav-wrap {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 58px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-fallback {
+      display: none;
+      color: var(--color-primary-dark);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      font-size: 1.45rem;
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.1rem;
+    }
+
+    .brand-subline {
+      color: var(--color-gray);
+      font-size: 0.78rem;
+    }
+
+    .site-nav {
+      display: none;
+      position: absolute;
+      top: 76px;
+      left: 1rem;
+      right: 1rem;
+      flex-direction: column;
+      gap: 0.35rem;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      padding: 0.75rem;
+    }
+
+    .site-nav.is-open {
+      display: flex;
+    }
+
+    .site-nav a {
+      padding: 0.8rem 0.9rem;
+      border-radius: 12px;
+      color: var(--color-dark);
+      font-weight: 700;
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+      outline: none;
+    }
+
+    .nav-toggle {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-white);
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--color-dark);
+      border-radius: 999px;
+      transition: var(--transition);
+      content: "";
+    }
+
+    .nav-toggle span::before { transform: translateY(-7px); }
+    .nav-toggle span::after { transform: translateY(5px); }
+    .nav-toggle.is-open span { background: transparent; }
+    .nav-toggle.is-open span::before { transform: translateY(1px) rotate(45deg); }
+    .nav-toggle.is-open span::after { transform: translateY(-1px) rotate(-45deg); }
+
+    .hero {
+      padding: 3.4rem 0 3.2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin-top: 1rem;
+      font-size: clamp(2.65rem, 11vw, 5.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.08em;
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      font-size: clamp(1.25rem, 4vw, 2rem);
+      line-height: 1.18;
+      font-weight: 780;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      margin-top: 1rem;
+      color: var(--color-gray);
+      font-size: 1.06rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.85rem 1.12rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 820;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .btn-primary {
+      color: var(--color-white);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      box-shadow: 0 12px 24px rgba(0, 140, 149, 0.25);
+    }
+
+    .btn-secondary {
+      color: var(--color-primary-dark);
+      background: var(--color-white);
+      border-color: var(--color-border);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-panel {
+      border: 1px solid rgba(0, 140, 149, 0.15);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(0, 140, 149, 0.14), transparent 11rem),
+        rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow-card);
+      padding: 1.25rem;
+    }
+
+    .hero-diagram {
+      min-height: 310px;
+      display: grid;
+      gap: 0.8rem;
+      align-content: center;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at center, rgba(228, 247, 248, 0.85), rgba(255, 255, 255, 0.9)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(228, 247, 248, 0.72));
+      padding: 1.2rem;
+    }
+
+    .diagram-part {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      background: rgba(255, 255, 255, 0.86);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+      animation: floatPart 4.2s ease-in-out infinite;
+    }
+
+    .diagram-part:nth-child(2) { animation-delay: 0.2s; }
+    .diagram-part:nth-child(3) { animation-delay: 0.4s; }
+
+    .diagram-part strong {
+      font-size: 1.05rem;
+    }
+
+    .diagram-part span {
+      color: var(--color-primary-dark);
+      font-weight: 900;
+    }
+
+    @keyframes floatPart {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      margin-top: 0.85rem;
+      font-size: clamp(1.85rem, 6vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      margin-top: 1rem;
+      color: var(--color-gray);
+      font-size: 1.03rem;
+    }
+
+    .module-grid,
+    .foot-grid,
+    .process-grid,
+    .sustainability-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .module-card,
+    .foot-card,
+    .process-card,
+    .sustainability-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-white);
+      box-shadow: var(--shadow-soft);
+      padding: 1.15rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 500ms ease,
+        transform 500ms ease,
+        border-color var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .module-card.is-visible,
+    .foot-card.is-visible,
+    .process-card.is-visible,
+    .sustainability-card.is-visible,
+    .timeline-item.is-visible,
+    .download-card.is-visible,
+    .foot-detail.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .module-card:hover,
+    .foot-card:hover,
+    .process-card:hover,
+    .sustainability-card:hover {
+      border-color: rgba(0, 140, 149, 0.36);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+      font-weight: 900;
+      margin-bottom: 0.85rem;
+    }
+
+    .module-card h3,
+    .foot-card h3,
+    .process-card h3,
+    .sustainability-card h3 {
+      font-size: 1.18rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+    }
+
+    .module-card ul,
+    .foot-card ul,
+    .process-card ul,
+    .sustainability-card ul {
+      display: grid;
+      gap: 0.45rem;
+      color: var(--color-gray);
+      padding-left: 1.1rem;
+    }
+
+    .foot-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .foot-image {
+      min-height: 210px;
+      background: var(--color-primary-light);
+      border-bottom: 1px solid var(--color-border);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    .foot-image img {
+      width: 100%;
+      height: 210px;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 20px rgba(47, 52, 55, 0.12));
+      transition: transform 340ms ease;
+    }
+
+    .foot-card:hover .foot-image img {
+      transform: scale(1.04);
+    }
+
+    .foot-content {
+      padding: 1.15rem;
+    }
+
+    .foot-content p {
+      color: var(--color-gray);
+      margin-bottom: 0.85rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background: var(--color-white);
+      color: var(--color-dark);
+      padding: 0.65rem 0.95rem;
+      font-weight: 820;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .tab-button.is-active {
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+      border-color: rgba(0, 140, 149, 0.34);
+    }
+
+    .foot-detail {
+      display: grid;
+      gap: 1rem;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-soft);
+      padding: 1.1rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .detail-image {
+      min-height: 220px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 140, 149, 0.16);
+      background: var(--color-primary-light);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    .detail-image img {
+      max-height: 250px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 18px rgba(47, 52, 55, 0.13));
+    }
+
+    .detail-text h3 {
+      font-size: clamp(1.35rem, 5vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.65rem;
+    }
+
+    .detail-text p {
+      color: var(--color-gray);
+      margin-bottom: 1rem;
+    }
+
+    .detail-text ul {
+      display: grid;
+      gap: 0.5rem;
+      padding-left: 1.1rem;
+      color: var(--color-dark);
+    }
+
+    .detail-note {
+      margin-top: 1rem;
+      border-radius: 16px;
+      background: var(--color-light-gray);
+      border: 1px solid var(--color-border);
+      padding: 0.9rem;
+      color: var(--color-gray);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0.9rem;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-primary), rgba(0, 140, 149, 0.08));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 0.85rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .step-number {
+      z-index: 1;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--color-white);
+      background: var(--color-primary);
+      font-weight: 900;
+      box-shadow: 0 0 0 8px rgba(0, 140, 149, 0.1);
+    }
+
+    .step-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem;
+    }
+
+    .step-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-card p {
+      color: var(--color-gray);
+    }
+
+    .process-card {
+      background:
+        radial-gradient(circle at top right, rgba(0, 140, 149, 0.08), transparent 8rem),
+        var(--color-white);
+    }
+
+    .download-card {
+      display: grid;
+      gap: 1rem;
+      align-items: center;
+      border: 1px solid rgba(0, 140, 149, 0.18);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 80% 20%, rgba(0, 140, 149, 0.16), transparent 14rem),
+        linear-gradient(135deg, #ffffff, #effafb);
+      box-shadow: var(--shadow-card);
+      padding: 1.25rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .download-card h2 {
+      font-size: clamp(1.7rem, 6vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .download-card p {
+      color: var(--color-gray);
+      margin-top: 0.75rem;
+    }
+
+    .download-note {
+      font-size: 0.94rem;
+      color: var(--color-primary-dark);
+      font-weight: 750;
+    }
+
+    .sustainability-card {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .line-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(109, 91, 208, 0.12);
+      color: #4f3fb2;
+      font-weight: 900;
+    }
+
+    .site-footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-gray);
+      font-size: 0.92rem;
+      background: var(--color-white);
+    }
+
+    .site-footer strong {
+      color: var(--color-dark);
+    }
+
+    @media (min-width: 720px) {
+      .hero-actions {
+        flex-direction: row;
+      }
+
+      .module-grid,
+      .foot-grid,
+      .process-grid,
+      .sustainability-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .foot-detail,
+      .download-card {
+        grid-template-columns: 0.85fr 1.15fr;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .site-nav {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.9fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 1.25rem, var(--container));
+      }
+
+      .nav-wrap {
+        min-height: 72px;
+      }
+
+      .brand-logo {
+        width: 48px;
+      }
+
+      .brand-subline {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero-diagram {
+        min-height: 250px;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .foot-image img {
+        height: 185px;
+      }
+
+      .download-card {
+        padding: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .module-card,
+      .foot-card,
+      .process-card,
+      .sustainability-card,
+      .timeline-item,
+      .download-card,
+      .foot-detail {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="NXTARM.html" aria-label="NEXT Arm Startseite">
+        <img class="brand-logo" src="logo.png" alt="NEXT Arm Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span class="brand-fallback">NEXT Arm</span>
+        <span class="brand-text">
+          <span class="brand-title">NEXT Arm</span>
+          <span class="brand-subline">Montage & Modulwechsel</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Navigation oeffnen" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="NXTARM.html">Startseite</a>
+        <a href="Nachhaltigkeit.html">Nachhaltigkeit</a>
+        <a href="ersatzteile.html">Ersatzteile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Montage & Modulwechsel</span>
+          <h1>Montage & Modulwechsel</h1>
+          <p class="hero-subtitle">Ein modularer Handyhalter fuer verschiedene Einsatzorte</p>
+          <p class="hero-text">
+            NEXT Arm besteht aus drei Hauptmodulen: Kopf, Koerper und Fuss. Durch den modularen Aufbau kann
+            der Handyhalter an verschiedene Nutzungssituationen angepasst und mit unterschiedlichen Fussmodulen
+            befestigt werden.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#module">Module ansehen</a>
+            <a class="btn btn-secondary" href="Montageanleitung.pdf" download>Montageanleitung herunterladen</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Schematische Darstellung der drei NEXT Arm Baugruppen">
+          <div class="hero-diagram">
+            <div class="diagram-part"><strong>Kopfmodul</strong><span>Smartphone</span></div>
+            <div class="diagram-part"><strong>Koerpermodul</strong><span>Position</span></div>
+            <div class="diagram-part"><strong>Fussmodul</strong><span>Befestigung</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="module" aria-labelledby="module-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Moduluebersicht</span>
+          <h2 id="module-title">Drei Hauptmodule, ein flexibles System</h2>
+          <p>Die Baugruppen sind klar getrennt und koennen je nach Funktion montiert, ersetzt oder erweitert werden.</p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module-card reveal">
+            <div class="icon-box">K</div>
+            <h3>Kopfmodul</h3>
+            <ul>
+              <li>Aufnahme und Fixierung des Smartphones</li>
+              <li>Breitenverstellung des Handyhalters</li>
+              <li>Kontaktflaechen mit Haftstreifen</li>
+            </ul>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="icon-box">M</div>
+            <h3>Koerpermodul</h3>
+            <ul>
+              <li>Positionierung des Handyhalters</li>
+              <li>Verstellung des Winkels</li>
+              <li>Verbindung zwischen Kopf und Fuss</li>
+            </ul>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="icon-box">F</div>
+            <h3>Fussmodul</h3>
+            <ul>
+              <li>Befestigung an unterschiedlichen Einsatzorten</li>
+              <li>Austauschbar je nach Anwendung</li>
+              <li>Schnittstelle zum Koerpermodul</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fussmodule" aria-labelledby="foot-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Befestigungsvarianten</span>
+          <h2 id="foot-title">Austauschbare Fussmodule</h2>
+          <p>Die Fussmodule ermoeglichen verschiedene Einsatzorte, ohne den gesamten NEXT Arm neu aufzubauen.</p>
+        </div>
+
+        <div class="foot-grid">
+          <article class="foot-card reveal">
+            <div class="foot-image"><img src="Klemme.png" alt="Klemm-Fussmodul fuer NEXT Arm" /></div>
+            <div class="foot-content">
+              <h3>Klemme</h3>
+              <p>Fuer die stabile Befestigung an Tischkanten, Profilen oder dem Mobile Working Hub.</p>
+              <ul>
+                <li>hohe Stabilitaet</li>
+                <li>schnell loesbar</li>
+                <li>gut fuer stationaere Nutzung</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="foot-card reveal">
+            <div class="foot-image"><img src="saugnapf.png" alt="Saugnapf-Fussmodul fuer NEXT Arm" /></div>
+            <div class="foot-content">
+              <h3>Saugnapf</h3>
+              <p>Fuer glatte Oberflaechen und flexible Einsatzorte.</p>
+              <ul>
+                <li>ohne Verschraubung nutzbar</li>
+                <li>schnell positionierbar</li>
+                <li>geeignet fuer glatte Flaechen</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="foot-card reveal">
+            <div class="foot-image"><img src="Fahrradhalter.png" alt="Fahrradhalter-Fussmodul fuer NEXT Arm" /></div>
+            <div class="foot-content">
+              <h3>Fahrradhalter</h3>
+              <p>Fuer runde Profile, Stangen oder rohraehnliche Befestigungspunkte.</p>
+              <ul>
+                <li>flexible Befestigung an Rundprofilen</li>
+                <li>kompakt</li>
+                <li>geeignet fuer mobile Anwendungen</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="detail-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Interaktive Auswahl</span>
+          <h2 id="detail-title">Fussmodul im Detail</h2>
+          <p>Waehlen Sie eine Variante aus, um Einsatzbereich, Vorteile und Montagehinweis direkt zu vergleichen.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Fussmodule">
+          <button class="tab-button is-active" type="button" data-module="klemme">Klemme</button>
+          <button class="tab-button" type="button" data-module="saugnapf">Saugnapf</button>
+          <button class="tab-button" type="button" data-module="fahrradhalter">Fahrradhalter</button>
+        </div>
+
+        <article class="foot-detail reveal" id="footDetail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="wechsel-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Modulwechsel</span>
+          <h2 id="wechsel-title">So funktioniert der Modulwechsel</h2>
+          <p>Der Wechsel nutzt dieselbe Schnittstelle zwischen Koerpermodul und Fussmodul.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="step-number">1</div>
+            <div class="step-card">
+              <h3>Verbindung loesen</h3>
+              <p>Die Verbindung zwischen Koerpermodul und Fussmodul wird ueber die vorhandene Schraubverbindung geloest.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="step-number">2</div>
+            <div class="step-card">
+              <h3>Fussmodul entfernen</h3>
+              <p>Das aktuell montierte Fussmodul wird vom Koerpermodul getrennt.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="step-number">3</div>
+            <div class="step-card">
+              <h3>Neues Fussmodul einsetzen</h3>
+              <p>Das gewuenschte Fussmodul, z. B. Klemme, Saugnapf oder Fahrradhalter, wird an derselben Schnittstelle eingesetzt.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="step-number">4</div>
+            <div class="step-card">
+              <h3>Verbindung sichern</h3>
+              <p>Die Schraubverbindung wird wieder angezogen, bis das Modul sicher sitzt.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="step-number">5</div>
+            <div class="step-card">
+              <h3>Funktion pruefen</h3>
+              <p>Nach dem Wechsel wird geprueft, ob der Halter stabil steht und sich der Koerper weiterhin verstellen laesst.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="prozess-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Montageprozess</span>
+          <h2 id="prozess-title">Montage in drei Baugruppen</h2>
+          <p>Die Montage folgt der Produktstruktur: Kopf, Koerper und Fuss werden separat vorbereitet und danach verbunden.</p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card reveal">
+            <div class="icon-box">01</div>
+            <h3>Kopf montieren</h3>
+            <ul>
+              <li>Seitenhalter einsetzen</li>
+              <li>Montageplatte vorbereiten</li>
+              <li>Smartphone-Aufnahme pruefen</li>
+            </ul>
+          </article>
+
+          <article class="process-card reveal">
+            <div class="icon-box">02</div>
+            <h3>Koerper montieren</h3>
+            <ul>
+              <li>Koerperstangen verbinden</li>
+              <li>Rotationsgabeln montieren</li>
+              <li>Gelenke sichern</li>
+            </ul>
+          </article>
+
+          <article class="process-card reveal">
+            <div class="icon-box">03</div>
+            <h3>Fuss montieren</h3>
+            <ul>
+              <li>passendes Fussmodul auswaehlen</li>
+              <li>Schraub- oder Klemmverbindung montieren</li>
+              <li>Befestigung pruefen</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="download-title">
+      <div class="container">
+        <article class="download-card reveal">
+          <div>
+            <span class="eyebrow">PDF-Download</span>
+            <h2 id="download-title">Montageanleitung herunterladen</h2>
+            <p>
+              Die vollstaendige Montageanleitung enthaelt alle Vormontage-, Modulmontage- und Endmontageschritte als PDF.
+            </p>
+            <p class="download-note">
+              Die Montageanleitung kann fuer Werkstatt, Praesentation oder QR-Code-Anwendung genutzt werden.
+            </p>
+          </div>
+          <div>
+            <a class="btn btn-primary" href="Montageanleitung.pdf" download>PDF herunterladen</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sustainability-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Nachhaltigkeitsbezug</span>
+          <h2 id="sustainability-title">Warum Modularitaet nachhaltig ist</h2>
+          <p>Loesbare Verbindungen und austauschbare Module verlaengern die Nutzungsdauer des Produkts.</p>
+        </div>
+
+        <div class="sustainability-grid">
+          <article class="sustainability-card reveal">
+            <div class="line-icon">R</div>
+            <h3>Module ersetzen</h3>
+            <ul>
+              <li>einzelne Module koennen ersetzt werden</li>
+              <li>beschaedigte Teile fuehren nicht zum Austausch des gesamten Produkts</li>
+            </ul>
+          </article>
+
+          <article class="sustainability-card reveal">
+            <div class="line-icon">+</div>
+            <h3>Nutzung verlaengern</h3>
+            <ul>
+              <li>unterschiedliche Fussmodule erhoehen die Nutzungsdauer</li>
+              <li>loesbare Schraubverbindungen unterstuetzen Reparatur und Demontage</li>
+            </ul>
+          </article>
+
+          <article class="sustainability-card reveal">
+            <div class="line-icon">↻</div>
+            <h3>Gezielt nachbestellen</h3>
+            <ul>
+              <li>Ersatzteile koennen passend zur Baugruppe angefragt werden</li>
+              <li>Modularitaet ermoeglicht Repair, Reuse und Remanufacture</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Projektwebsite</strong> im Rahmen des Interdisciplinary Project - Werk150 / NXTARM</p>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+    const navLinks = document.querySelectorAll(".site-nav a");
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const footDetail = document.querySelector("#footDetail");
+
+    const footModules = {
+      klemme: {
+        title: "Klemme",
+        image: "Klemme.png",
+        area: "Stabile Befestigung an Tischkanten, Profilen oder am Mobile Working Hub.",
+        advantages: ["hohe Stabilitaet", "schnell loesbar", "gut fuer stationaere Nutzung"],
+        note: "Das Klemmmodul wird an der Schnittstelle zum Koerpermodul eingesetzt und ueber die Schraubverbindung gesichert."
+      },
+      saugnapf: {
+        title: "Saugnapf",
+        image: "saugnapf.png",
+        area: "Flexible Befestigung auf glatten Oberflaechen ohne dauerhafte Verschraubung.",
+        advantages: ["ohne Verschraubung nutzbar", "schnell positionierbar", "geeignet fuer glatte Flaechen"],
+        note: "Vor der Montage sollte die Kontaktflaeche sauber und glatt sein, damit der Saugnapf sicher haelt."
+      },
+      fahrradhalter: {
+        title: "Fahrradhalter",
+        image: "Fahrradhalter.png",
+        area: "Befestigung an runden Profilen, Stangen oder rohraehnlichen Befestigungspunkten.",
+        advantages: ["flexible Befestigung an Rundprofilen", "kompakt", "geeignet fuer mobile Anwendungen"],
+        note: "Das Modul wird um das Rundprofil gelegt und anschliessend an der Verbindung zum Koerpermodul fixiert."
+      }
+    };
+
+    function renderFootDetail(key) {
+      const item = footModules[key];
+      footDetail.classList.remove("is-visible");
+      footDetail.innerHTML = `
+        <div class="detail-image">
+          <img src="${item.image}" alt="${item.title} Fussmodul fuer NEXT Arm" />
+        </div>
+        <div class="detail-text">
+          <span class="eyebrow">Aktives Fussmodul</span>
+          <h3>${item.title}</h3>
+          <p><strong>Einsatzbereich:</strong> ${item.area}</p>
+          <ul>${item.advantages.map((advantage) => `<li>${advantage}</li>`).join("")}</ul>
+          <p class="detail-note"><strong>Montagehinweis:</strong> ${item.note}</p>
+        </div>
+      `;
+
+      window.requestAnimationFrame(() => {
+        footDetail.classList.add("is-visible");
+      });
+    }
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "Navigation schliessen" : "Navigation oeffnen");
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        siteNav.classList.remove("is-open");
+        navToggle.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Navigation oeffnen");
+      });
+    });
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach((item) => item.classList.remove("is-active"));
+        button.classList.add("is-active");
+        renderFootDetail(button.dataset.module);
+      });
+    });
+
+    // Dezente Scroll-Reveal-Animation fuer Karten, Timeline und Downloadbereich.
+    function setupReveal() {
+      const items = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        items.forEach((item) => item.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      items.forEach((item) => observer.observe(item));
+    }
+
+    renderFootDetail("klemme");
+    setupReveal();
+  </script>
+</body>
+</html>
